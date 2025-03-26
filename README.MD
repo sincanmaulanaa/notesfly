@@ -25,7 +25,7 @@ A modern, responsive note-taking web application built with vanilla JavaScript, 
 1. Clone the repository:
 
 ```shellscript
-git clone https://github.com/yourusername/notesfly.git
+git clone https://github.com/sincanmaulanaa/notesfly.git
 ```
 
 2. Navigate to the project directory:
@@ -71,6 +71,7 @@ notesfly/
 │       └── style.css
 └── images/
     └── app-icon.png
+    └── screenshot.png
 ```
 
 ## Features in Detail
