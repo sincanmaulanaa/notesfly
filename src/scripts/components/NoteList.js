@@ -11,8 +11,8 @@ class NoteList extends HTMLElement {
     try {
       this.showLoadingSpinner();
       const notes = await getAllNotes();
-      this.renderNotes(notes);
       this.hideLoadingSpinner();
+      this.renderNotes(notes);
       this.attachEventListeners();
     } catch (error) {
       console.error('Error rendering notes:', error);
@@ -100,9 +100,9 @@ class NoteList extends HTMLElement {
     if (result.isConfirmed) {
       try {
         await removeNote(noteId);
-        Swal.fire({
+        await Swal.fire({
           title: 'Deleted!',
-          text: 'Your file has been deleted.',
+          text: 'Your note has been deleted.',
           icon: 'success',
         });
         this.render();
