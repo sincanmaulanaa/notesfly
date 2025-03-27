@@ -1,4 +1,5 @@
-import { getAllNotes } from '../data/dataSource';
+import { getAllNotes, removeNote } from '../data/dataSource';
+import Swal from 'sweetalert2';
 
 class NoteList extends HTMLElement {
   connectedCallback() {
@@ -9,11 +10,7 @@ class NoteList extends HTMLElement {
     try {
       this.innerHTML = '';
       const notes = await getAllNotes();
-
-      if (notes.length === 0) {
-        this.innerHTML = '<p class="empty-message">No notes available.</p>';
-        return;
-      }
+      const noteListElement = document.querySelector('note-list');
 
       this.innerHTML = notes
         .map((note) => {
@@ -31,7 +28,7 @@ class NoteList extends HTMLElement {
 		<span>${formattedDate}</span>
 		<p>${note.body}</p>
 		<div class="action">
-		  <button type="button" class="btn-archive" data-title="${note.title}">
+		  <button type="button" class="btn-archive" data-id="${note.id}">
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 			<polyline points="21 8 21 21 3 21 3 8"></polyline>
 			<rect x="1" y="3" width="22" height="5"></rect>
@@ -39,7 +36,7 @@ class NoteList extends HTMLElement {
 			</svg>
 			Archive
 		  </button>
-		  <button type="button" class="btn-remove" data-title="${note.title}">
+		  <button type="button" class="btn-remove" data-id="${note.id}">
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 			<polyline points="3 6 5 6 21 6"></polyline>
 			<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -59,12 +56,43 @@ class NoteList extends HTMLElement {
       );
 
       this.querySelectorAll('.btn-remove').forEach((button) =>
-        button.addEventListener('click', () =>
-          console.log(`Removing note: ${button.dataset.title}`)
-        )
+        button.addEventListener('click', async () => {
+          const noteId = button.dataset.id;
+          console.log(noteId);
+
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#5f6cff',
+            cancelButtonColor: '#f56565',
+            confirmButtonText: 'Yes, delete it!',
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+              try {
+                await removeNote(noteId);
+                Swal.fire({
+                  title: 'Deleted!',
+                  text: 'Your file has been deleted.',
+                  icon: 'success',
+                });
+                if (noteListElement) {
+                  await noteListElement.render();
+                }
+              } catch (error) {
+                Swal.fire({
+                  title: 'Failed!',
+                  text: 'Failed to delete the note.',
+                  icon: 'error',
+                });
+              }
+            }
+          });
+        })
       );
     } catch (error) {
-      console.error('Error rendering notes:', error);
+      console.log('Error rendering notes:', error);
     }
   }
 }

@@ -80,6 +80,10 @@ app-bar {
   gap: 0.8rem;
 }
 
+.app-bar-left h1 {
+  color: var(--primary-color);
+}
+
 .app-logo {
   display: flex;
   align-items: center;
@@ -172,11 +176,13 @@ app-bar h1 {
 #search-notes-desktop::placeholder,
 #search-notes-mobile::placeholder {
   color: var(--text-secondary);
+  border: none;
 }
 
 #search-notes-desktop:focus,
 #search-notes-mobile:focus {
   outline: none;
+  border: none;
 }
 
 /* Hamburger Menu */

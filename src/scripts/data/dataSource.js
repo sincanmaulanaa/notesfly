@@ -9,11 +9,7 @@ export const getAllNotes = async () => {
 
   const responseJson = await response.json();
 
-  if (responseJson.data && responseJson.data.length > 0) {
-    return responseJson.data;
-  } else {
-    throw new Error('No notes available to display');
-  }
+  return responseJson.data;
 };
 
 export const createNote = async (note) => {
