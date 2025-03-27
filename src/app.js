@@ -1,9 +1,9 @@
-import 'regenerator-runtime';
-import './styles/style.css';
-import './styles/loading.css';
-import './scripts/components/appBar';
-import './scripts/components/NoteForm';
-import './scripts/components/AppFooter';
-import './scripts/components/NoteList';
+import "regenerator-runtime";
+import "./styles/style.css";
+import "./styles/loading.css";
+import "./scripts/components/appBar";
+import "./scripts/components/NoteForm";
+import "./scripts/components/AppFooter";
+import "./scripts/components/NoteList";
 
-document.addEventListener('DOMContentLoaded', () => {});
+document.addEventListener("DOMContentLoaded", () => {});

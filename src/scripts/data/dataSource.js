@@ -1,4 +1,4 @@
-const API_ENDPOINT = 'https://notes-api.dicoding.dev/v2';
+const API_ENDPOINT = "https://notes-api.dicoding.dev/v2";
 
 export const getAllNotes = async () => {
   const response = await fetch(`${API_ENDPOINT}/notes`);
@@ -14,9 +14,9 @@ export const getAllNotes = async () => {
 
 export const createNote = async (note) => {
   const response = await fetch(`${API_ENDPOINT}/notes`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(note),
   });
@@ -27,10 +27,10 @@ export const createNote = async (note) => {
 
   const responseJson = await response.json();
 
-  if (responseJson.status === 'success') {
+  if (responseJson.status === "success") {
     return responseJson.data;
   } else {
-    throw new Error('Failed to create a new note');
+    throw new Error("Failed to create a new note");
   }
 };
 
@@ -43,10 +43,10 @@ export const getAllArchivedNotes = async () => {
 
   const responseJson = await response.json();
 
-  if (responseJson.status === 'success') {
+  if (responseJson.status === "success") {
     return responseJson.data;
   } else {
-    throw new Error('Failed to fetch archived notes');
+    throw new Error("Failed to fetch archived notes");
   }
 };
 
@@ -59,16 +59,16 @@ export const getNote = async (noteId) => {
 
   const responseJson = await response.json();
 
-  if (responseJson.status === 'success') {
+  if (responseJson.status === "success") {
     return responseJson.data;
   } else {
-    throw new Error('Failed to fetch the note');
+    throw new Error("Failed to fetch the note");
   }
 };
 
 export const archiveNote = async (noteId) => {
   const response = await fetch(`${API_ENDPOINT}/notes/${noteId}/archive`, {
-    method: 'POST',
+    method: "POST",
   });
 
   if (!response.ok) {
@@ -77,16 +77,16 @@ export const archiveNote = async (noteId) => {
 
   const responseJson = await response.json();
 
-  if (responseJson.status === 'success') {
+  if (responseJson.status === "success") {
     return responseJson.data;
   } else {
-    throw new Error('Failed to archive the note');
+    throw new Error("Failed to archive the note");
   }
 };
 
 export const unarchiveNote = async (noteId) => {
   const response = await fetch(`${API_ENDPOINT}/notes/${noteId}/unarchive`, {
-    method: 'POST',
+    method: "POST",
   });
 
   if (!response.ok) {
@@ -95,16 +95,16 @@ export const unarchiveNote = async (noteId) => {
 
   const responseJson = await response.json();
 
-  if (responseJson.status === 'success') {
+  if (responseJson.status === "success") {
     return responseJson.data;
   } else {
-    throw new Error('Failed to unarchive the note');
+    throw new Error("Failed to unarchive the note");
   }
 };
 
 export const removeNote = async (noteId) => {
   const response = await fetch(`${API_ENDPOINT}/notes/${noteId}`, {
-    method: 'DELETE',
+    method: "DELETE",
   });
 
   if (!response.ok) {
@@ -113,10 +113,10 @@ export const removeNote = async (noteId) => {
 
   const responseJson = await response.json();
 
-  if (responseJson.status === 'success') {
+  if (responseJson.status === "success") {
     getAllNotes();
     return responseJson.data;
   } else {
-    throw new Error('Failed to delete the note');
+    throw new Error("Failed to delete the note");
   }
 };

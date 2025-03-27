@@ -1,6 +1,6 @@
-import { getAllNotes, removeNote } from '../data/dataSource';
-import Swal from 'sweetalert2';
-import './Loading';
+import { getAllNotes, removeNote } from "../data/dataSource";
+import Swal from "sweetalert2";
+import "./Loading";
 
 class NoteList extends HTMLElement {
   connectedCallback() {
@@ -15,7 +15,7 @@ class NoteList extends HTMLElement {
       this.renderNotes(notes);
       this.attachEventListeners();
     } catch (error) {
-      console.error('Error rendering notes:', error);
+      console.error("Error rendering notes:", error);
     }
   }
 
@@ -25,21 +25,21 @@ class NoteList extends HTMLElement {
   }
 
   hideLoadingSpinner() {
-    const spinner = this.querySelector('loading-spinner');
+    const spinner = this.querySelector("loading-spinner");
     if (spinner) spinner.remove();
   }
 
   renderNotes(notes) {
     this.innerHTML = notes
       .map((note) => this.createNoteTemplate(note))
-      .join('');
+      .join("");
   }
 
   createNoteTemplate(note) {
-    const formattedDate = new Date(note.createdAt).toLocaleDateString('id-ID', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric',
+    const formattedDate = new Date(note.createdAt).toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
     });
 
     return `
@@ -69,12 +69,12 @@ class NoteList extends HTMLElement {
   }
 
   attachEventListeners() {
-    this.querySelectorAll('.btn-archive').forEach((button) =>
-      button.addEventListener('click', () => this.handleArchive(button))
+    this.querySelectorAll(".btn-archive").forEach((button) =>
+      button.addEventListener("click", () => this.handleArchive(button)),
     );
 
-    this.querySelectorAll('.btn-remove').forEach((button) =>
-      button.addEventListener('click', () => this.handleRemove(button))
+    this.querySelectorAll(".btn-remove").forEach((button) =>
+      button.addEventListener("click", () => this.handleRemove(button)),
     );
   }
 
@@ -88,33 +88,33 @@ class NoteList extends HTMLElement {
     const noteId = button.dataset.id;
 
     const result = await Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#5f6cff',
-      cancelButtonColor: '#f56565',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonColor: "#5f6cff",
+      cancelButtonColor: "#f56565",
+      confirmButtonText: "Yes, delete it!",
     });
 
     if (result.isConfirmed) {
       try {
         await removeNote(noteId);
         await Swal.fire({
-          title: 'Deleted!',
-          text: 'Your note has been deleted.',
-          icon: 'success',
+          title: "Deleted!",
+          text: "Your note has been deleted.",
+          icon: "success",
         });
         this.render();
       } catch (error) {
         Swal.fire({
-          title: 'Failed!',
-          text: 'Failed to delete the note.',
-          icon: 'error',
+          title: "Failed!",
+          text: "Failed to delete the note.",
+          icon: "error",
         });
       }
     }
   }
 }
 
-customElements.define('note-list', NoteList);
+customElements.define("note-list", NoteList);
