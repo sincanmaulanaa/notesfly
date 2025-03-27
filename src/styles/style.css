@@ -475,9 +475,16 @@ note-item:hover,
 note-item h2,
 .note-item h2 {
   font-size: 1.125rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.1rem;
   color: var(--text-primary);
   font-weight: 600;
+}
+
+.note-item span {
+  font-size: 0.7rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 400;
 }
 
 note-item p,
