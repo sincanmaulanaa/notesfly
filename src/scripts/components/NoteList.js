@@ -11,46 +11,58 @@ class NoteList extends HTMLElement {
       const notes = await getAllNotes();
 
       if (notes.length === 0) {
-        const emptyMessage = document.createElement('p');
-        emptyMessage.classList.add('empty-message');
-        emptyMessage.innerText = 'No notes available.';
-        this.appendChild(emptyMessage);
+        this.innerHTML = '<p class="empty-message">No notes available.</p>';
         return;
       }
 
-      notes.forEach((note) => {
-        const noteItem = document.createElement('div');
-        noteItem.classList.add('note-item');
+      this.innerHTML = notes
+        .map((note) => {
+          const formattedDate = new Date(note.createdAt).toLocaleDateString(
+            'id-ID',
+            {
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric',
+            }
+          );
+          return `
+		<div class="note-item">
+		<h2>${note.title}</h2>
+		<p>${note.body}</p>
+		
+		<div class="action">
+		  <button type="button" class="btn-archive" data-title="${note.title}">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<polyline points="21 8 21 21 3 21 3 8"></polyline>
+			<rect x="1" y="3" width="22" height="5"></rect>
+			<line x1="10" y1="12" x2="14" y2="12"></line>
+			</svg>
+			Archive
+		  </button>
+		  <button type="button" class="btn-remove" data-title="${note.title}">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<polyline points="3 6 5 6 21 6"></polyline>
+			<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+			</svg>
+			Remove
+		  </button>
+		</div>
+		</div>
+	  `;
+        })
+        .join('');
 
-        const titleElement = document.createElement('h2');
-        titleElement.innerText = note.title;
+      this.querySelectorAll('.btn-archive').forEach((button) =>
+        button.addEventListener('click', () =>
+          console.log(`Archiving note: ${button.dataset.title}`)
+        )
+      );
 
-        const bodyElement = document.createElement('p');
-        bodyElement.innerText = note.body;
-
-        const archivedButtonElement = document.createElement('button');
-        archivedButtonElement.setAttribute('type', 'button');
-        archivedButtonElement.classList.add('btn-archive');
-        archivedButtonElement.innerText = 'Archive';
-        archivedButtonElement.addEventListener('click', () => {
-          console.log(`Archiving note: ${note.title}`);
-        });
-
-        const removeButtonElement = document.createElement('button');
-        removeButtonElement.setAttribute('type', 'button');
-        removeButtonElement.classList.add('btn-remove');
-        removeButtonElement.innerText = 'Remove';
-        removeButtonElement.addEventListener('click', () => {
-          console.log(`Removing note: ${note.title}`);
-        });
-
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('action');
-        buttonContainer.append(archivedButtonElement, removeButtonElement);
-
-        noteItem.append(titleElement, bodyElement, buttonContainer);
-        this.appendChild(noteItem);
-      });
+      this.querySelectorAll('.btn-remove').forEach((button) =>
+        button.addEventListener('click', () =>
+          console.log(`Removing note: ${button.dataset.title}`)
+        )
+      );
     } catch (error) {
       console.error('Error rendering notes:', error);
     }

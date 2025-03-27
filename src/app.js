@@ -5,4 +5,4 @@ import './scripts/components/NoteForm';
 import './scripts/components/AppFooter';
 import './scripts/components/NoteList';
 
-document.addEventListener('DOMContentLoaded');
+document.addEventListener('DOMContentLoaded', () => {});
