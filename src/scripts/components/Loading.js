@@ -36,26 +36,26 @@
 class LoadingSpinner extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback() {
-    this.size = this.getAttribute("size") || "medium";
-    this.color = this.getAttribute("color") || "primary";
-    this.type = this.getAttribute("type") || "circle";
-    this.label = this.getAttribute("aria-label") || "Loading";
-    this.fullscreen = this.hasAttribute("fullscreen");
+    this.size = this.getAttribute('size') || 'medium';
+    this.color = this.getAttribute('color') || 'primary';
+    this.type = this.getAttribute('type') || 'circle';
+    this.label = this.getAttribute('aria-label') || 'Loading';
+    this.fullscreen = this.hasAttribute('fullscreen');
 
     this.render();
   }
 
   static get observedAttributes() {
-    return ["size", "color", "type", "aria-label", "fullscreen"];
+    return ['size', 'color', 'type', 'aria-label', 'fullscreen'];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "fullscreen") {
-      this.fullscreen = this.hasAttribute("fullscreen");
+    if (name === 'fullscreen') {
+      this.fullscreen = this.hasAttribute('fullscreen');
     } else if (oldValue !== newValue) {
       this[name] = newValue;
     }
@@ -63,7 +63,7 @@ class LoadingSpinner extends HTMLElement {
   }
 
   render() {
-    const style = document.createElement("style");
+    const style = document.createElement('style');
     style.textContent = `
 		:host {
 		  display: inline-block;
@@ -214,11 +214,11 @@ class LoadingSpinner extends HTMLElement {
 		}
 	  `;
 
-    let spinnerHTML = "";
+    let spinnerHTML = '';
 
-    if (this.type === "circle") {
+    if (this.type === 'circle') {
       spinnerHTML = `<div class="spinner-circle spinner-${this.size} color-${this.color}" role="status"></div>`;
-    } else if (this.type === "dots") {
+    } else if (this.type === 'dots') {
       spinnerHTML = `
 		  <div class="spinner-dots spinner-${this.size} color-${this.color}" role="status">
 			<div class="dot"></div>
@@ -226,30 +226,30 @@ class LoadingSpinner extends HTMLElement {
 			<div class="dot"></div>
 		  </div>
 		`;
-    } else if (this.type === "pulse") {
+    } else if (this.type === 'pulse') {
       spinnerHTML = `<div class="spinner-pulse spinner-${this.size} color-${this.color}" role="status"></div>`;
     }
 
     spinnerHTML += `<span class="sr-only">${this.label}</span>`;
 
-    this.shadowRoot.innerHTML = "";
+    this.shadowRoot.innerHTML = '';
     this.shadowRoot.appendChild(style);
 
-    const wrapper = document.createElement("div");
+    const wrapper = document.createElement('div');
     wrapper.className = this.fullscreen
-      ? "fullscreen-container"
-      : "spinner-container";
+      ? 'fullscreen-container'
+      : 'spinner-container';
     wrapper.innerHTML = spinnerHTML;
     this.shadowRoot.appendChild(wrapper);
   }
 }
 
-customElements.define("loading-spinner", LoadingSpinner);
+customElements.define('loading-spinner', LoadingSpinner);
 
 class LoadingContainer extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback() {
@@ -257,7 +257,7 @@ class LoadingContainer extends HTMLElement {
   }
 
   render() {
-    const style = document.createElement("style");
+    const style = document.createElement('style');
     style.textContent = `
 		:host {
 		  display: block;
@@ -274,18 +274,18 @@ class LoadingContainer extends HTMLElement {
 		}
 	  `;
 
-    const container = document.createElement("div");
-    container.className = "loading-container";
+    const container = document.createElement('div');
+    container.className = 'loading-container';
 
-    const slot = document.createElement("slot");
+    const slot = document.createElement('slot');
     container.appendChild(slot);
 
-    this.shadowRoot.innerHTML = "";
+    this.shadowRoot.innerHTML = '';
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(container);
   }
 }
 
-customElements.define("loading-container", LoadingContainer);
+customElements.define('loading-container', LoadingContainer);
 
 export { LoadingSpinner, LoadingContainer };

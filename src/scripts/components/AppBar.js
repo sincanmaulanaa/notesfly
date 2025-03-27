@@ -120,58 +120,58 @@ class AppBar extends HTMLElement {
   }
 
   initializeElements() {
-    this.hamburgerMenu = this.querySelector("#hamburger-menu");
-    this.mobileMenuOverlay = this.querySelector("#mobile-menu-overlay");
-    this.closeMenu = this.querySelector("#close-menu");
-    this.themeToggleDesktop = this.querySelector("#theme-toggle-desktop");
-    this.themeToggleMobile = this.querySelector("#theme-toggle-mobile");
-    this.viewToggleDesktop = this.querySelector("#view-toggle-desktop");
-    this.viewToggleMobile = this.querySelector("#view-toggle-mobile");
-    this.searchInputDesktop = this.querySelector("#search-notes-desktop");
-    this.searchInputMobile = this.querySelector("#search-notes-mobile");
+    this.hamburgerMenu = this.querySelector('#hamburger-menu');
+    this.mobileMenuOverlay = this.querySelector('#mobile-menu-overlay');
+    this.closeMenu = this.querySelector('#close-menu');
+    this.themeToggleDesktop = this.querySelector('#theme-toggle-desktop');
+    this.themeToggleMobile = this.querySelector('#theme-toggle-mobile');
+    this.viewToggleDesktop = this.querySelector('#view-toggle-desktop');
+    this.viewToggleMobile = this.querySelector('#view-toggle-mobile');
+    this.searchInputDesktop = this.querySelector('#search-notes-desktop');
+    this.searchInputMobile = this.querySelector('#search-notes-mobile');
   }
 
   addEventListeners() {
     this.hamburgerMenu.addEventListener(
-      "click",
-      this.openMobileMenu.bind(this),
+      'click',
+      this.openMobileMenu.bind(this)
     );
-    this.closeMenu.addEventListener("click", this.closeMobileMenu.bind(this));
+    this.closeMenu.addEventListener('click', this.closeMobileMenu.bind(this));
     this.mobileMenuOverlay.addEventListener(
-      "click",
-      this.handleOverlayClick.bind(this),
+      'click',
+      this.handleOverlayClick.bind(this)
     );
     this.themeToggleDesktop.addEventListener(
-      "click",
-      this.toggleTheme.bind(this),
+      'click',
+      this.toggleTheme.bind(this)
     );
     this.themeToggleMobile.addEventListener(
-      "click",
-      this.toggleTheme.bind(this),
+      'click',
+      this.toggleTheme.bind(this)
     );
     this.viewToggleDesktop.addEventListener(
-      "click",
-      this.toggleView.bind(this),
+      'click',
+      this.toggleView.bind(this)
     );
-    this.viewToggleMobile.addEventListener("click", this.toggleView.bind(this));
+    this.viewToggleMobile.addEventListener('click', this.toggleView.bind(this));
     this.searchInputDesktop.addEventListener(
-      "input",
-      this.handleSearch.bind(this),
+      'input',
+      this.handleSearch.bind(this)
     );
     this.searchInputMobile.addEventListener(
-      "input",
-      this.handleSearch.bind(this),
+      'input',
+      this.handleSearch.bind(this)
     );
   }
 
   openMobileMenu() {
-    this.mobileMenuOverlay.classList.add("active");
-    document.body.style.overflow = "hidden";
+    this.mobileMenuOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
   closeMobileMenu() {
-    this.mobileMenuOverlay.classList.remove("active");
-    document.body.style.overflow = "";
+    this.mobileMenuOverlay.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
   handleOverlayClick(e) {
@@ -181,19 +181,19 @@ class AppBar extends HTMLElement {
   }
 
   toggleTheme() {
-    document.body.classList.toggle("dark-theme");
+    document.body.classList.toggle('dark-theme');
     localStorage.setItem(
-      "theme",
-      document.body.classList.contains("dark-theme") ? "dark" : "light",
+      'theme',
+      document.body.classList.contains('dark-theme') ? 'dark' : 'light'
     );
   }
 
   toggleView() {
-    const noteList = document.querySelector("note-list");
-    noteList.classList.toggle("list-view");
+    const noteList = document.querySelector('note-list');
+    noteList.classList.toggle('list-view');
     localStorage.setItem(
-      "view",
-      noteList.classList.contains("list-view") ? "list" : "grid",
+      'view',
+      noteList.classList.contains('list-view') ? 'list' : 'grid'
     );
   }
 
@@ -205,26 +205,26 @@ class AppBar extends HTMLElement {
       this.searchInputDesktop.value = searchTerm;
     }
 
-    const noteItems = document.querySelectorAll("note-item");
+    const noteItems = document.querySelectorAll('note-item');
     noteItems.forEach((item) => {
-      const title = item.getAttribute("title").toLowerCase();
-      const body = item.getAttribute("body").toLowerCase();
+      const title = item.getAttribute('title').toLowerCase();
+      const body = item.getAttribute('body').toLowerCase();
       item.style.display =
-        title.includes(searchTerm) || body.includes(searchTerm) ? "" : "none";
+        title.includes(searchTerm) || body.includes(searchTerm) ? '' : 'none';
     });
   }
 
   loadSavedPreferences() {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark-theme");
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
     }
 
-    const savedView = localStorage.getItem("view");
-    if (savedView === "list") {
-      document.querySelector("note-list").classList.add("list-view");
+    const savedView = localStorage.getItem('view');
+    if (savedView === 'list') {
+      document.querySelector('note-list').classList.add('list-view');
     }
   }
 }
 
-customElements.define("app-bar", AppBar);
+customElements.define('app-bar', AppBar);

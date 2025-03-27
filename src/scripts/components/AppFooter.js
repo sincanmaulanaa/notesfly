@@ -6,4 +6,4 @@ class AppFooter extends HTMLElement {
   }
 }
 
-customElements.define("app-footer", AppFooter);
+customElements.define('app-footer', AppFooter);

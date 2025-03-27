@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* Base Styles */
 :root {
@@ -41,7 +41,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: var(--background-light);
   color: var(--text-primary);
   line-height: 1.6;
@@ -360,20 +360,20 @@ note-form {
   gap: 0.5rem;
 }
 
-input[type="text"],
+input[type='text'],
 textarea {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
   transition: border-color var(--transition-speed);
   background-color: var(--background-white);
   color: var(--text-primary);
 }
 
-input[type="text"]:focus,
+input[type='text']:focus,
 textarea:focus {
   outline: none;
   border-color: var(--primary-color);
@@ -410,7 +410,7 @@ textarea.valid {
   border-color: var(--success-color);
 }
 
-button[type="submit"] {
+button[type='submit'] {
   align-self: flex-end;
   background-color: #e2e8f0;
   color: var(--text-secondary);
@@ -423,13 +423,13 @@ button[type="submit"] {
   transition: all var(--transition-speed);
 }
 
-button[type="submit"]:not(:disabled) {
+button[type='submit']:not(:disabled) {
   background-color: var(--primary-color);
   color: white;
   cursor: pointer;
 }
 
-button[type="submit"]:hover:not(:disabled) {
+button[type='submit']:hover:not(:disabled) {
   background-color: var(--primary-dark);
   transform: translateY(-1px);
 }
@@ -590,7 +590,7 @@ note-item p,
     padding: 1.25rem;
   }
 
-  button[type="submit"] {
+  button[type='submit'] {
     padding: 0.6rem 1rem;
     font-size: 0.875rem;
   }
@@ -643,7 +643,7 @@ note-item p,
 
 /* Empty state */
 note-list:empty::after {
-  content: "No notes yet. Create your first note!";
+  content: 'No notes yet. Create your first note!';
   grid-column: 1 / -1;
   text-align: center;
   padding: 2.5rem;
