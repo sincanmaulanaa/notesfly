@@ -1,5 +1,6 @@
 import { getAllNotes, removeNote } from '../data/dataSource';
 import Swal from 'sweetalert2';
+import './Loading';
 
 class NoteList extends HTMLElement {
   connectedCallback() {
@@ -8,9 +9,16 @@ class NoteList extends HTMLElement {
 
   async render() {
     try {
-      this.innerHTML = '';
-      const notes = await getAllNotes();
       const noteListElement = document.querySelector('note-list');
+      this.innerHTML =
+        '<loading-spinner fullscreen size="large"></loading-spinner>';
+      const spinner = this.querySelector('loading-spinner');
+
+      const notes = await getAllNotes();
+
+      if (spinner) {
+        spinner.remove();
+      }
 
       this.innerHTML = notes
         .map((note) => {
