@@ -425,6 +425,7 @@ note-list {
   grid-template-columns: 1fr;
   gap: 1rem;
   width: 100%;
+  margin-bottom: 3rem;
 }
 
 @media (min-width: 640px) {
@@ -444,7 +445,7 @@ note-list.list-view {
 }
 
 /* Note Item */
-note-item {
+.note-item {
   background-color: var(--background-white);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-light);
@@ -459,21 +460,57 @@ note-item {
   background-color: rgba(98, 0, 234, 0.05);
 }
 
-.dark-theme note-item {
+.dark-theme .note-item {
   background-color: rgba(187, 134, 252, 0.05);
 }
 
-note-item h2 {
+.note-item h2 {
   font-size: 1.3rem;
   margin-bottom: 0.8rem;
   color: var(--text-primary);
 }
 
-note-item p {
+.note-item p {
   color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.6;
   flex-grow: 1;
+}
+
+.btn-archive {
+  background-color: #6200ea;
+  padding: 0.7rem 1rem;
+  border-radius: 0.3rem;
+  border: none;
+  font-size: 0.9rem;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-archive:hover {
+  background-color: var(--primary-light);
+  transition: all 200ms ease-in-out;
+}
+
+.action {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.btn-remove {
+  background-color: var(--error-color);
+  padding: 0.7rem 1rem;
+  border-radius: 0.3rem;
+  border: none;
+  font-size: 0.9rem;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-remove:hover {
+  background-color: #e99393;
+  transition: all 200ms ease-in-out;
 }
 
 /* Responsive */
@@ -564,4 +601,17 @@ note-list:empty::after {
   background-color: var(--background-white);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-light);
+}
+
+footer {
+  background-color: rgba(84, 42, 199, 0.6); /* Purple with transparency */
+  backdrop-filter: blur(10px); /* Glass effect */
+  color: white;
+  text-align: center;
+  padding: 0.6rem 0;
+  font-size: 0.8rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
