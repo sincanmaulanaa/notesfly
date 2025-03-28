@@ -190,11 +190,18 @@ class AppBar extends HTMLElement {
 
   toggleView() {
     const noteList = document.querySelector('note-list');
-    noteList.classList.toggle('list-view');
-    localStorage.setItem(
-      'view',
-      noteList.classList.contains('list-view') ? 'list' : 'grid'
-    );
+    const archivedNoteList = document.querySelector('archived-note-list');
+
+    if (noteList) {
+      noteList.classList.toggle('list-view');
+    }
+
+    if (archivedNoteList) {
+      archivedNoteList.classList.toggle('list-view');
+    }
+
+    const isListView = noteList && noteList.classList.contains('list-view');
+    localStorage.setItem('view', isListView ? 'list' : 'grid');
   }
 
   handleSearch(e) {
@@ -222,7 +229,16 @@ class AppBar extends HTMLElement {
 
     const savedView = localStorage.getItem('view');
     if (savedView === 'list') {
-      document.querySelector('note-list').classList.add('list-view');
+      const noteList = document.querySelector('note-list');
+      const archivedNoteList = document.querySelector('archived-note-list');
+
+      if (noteList) {
+        noteList.classList.add('list-view');
+      }
+
+      if (archivedNoteList) {
+        archivedNoteList.classList.add('list-view');
+      }
     }
   }
 }

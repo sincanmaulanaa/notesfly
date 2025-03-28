@@ -458,7 +458,7 @@ note-list {
   }
 }
 
-archived-note-list,
+archived-note-list.list-view,
 note-list.list-view {
   grid-template-columns: 1fr;
 }

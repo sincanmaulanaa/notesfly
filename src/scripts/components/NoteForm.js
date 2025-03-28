@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { createNote } from '../data/dataSource';
 
 class NoteForm extends HTMLElement {
@@ -111,6 +112,11 @@ class NoteForm extends HTMLElement {
 
       try {
         await createNote(newNote);
+        await Swal.fire({
+          title: 'Note Created!',
+          text: 'Your new note has been successfully added. Keep up the great work!',
+          icon: 'success',
+        });
         this.resetForm();
         const noteListElement = document.querySelector('note-list');
         if (noteListElement) {
