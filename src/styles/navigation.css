@@ -44,6 +44,14 @@
   color: var(--text-muted, #718096);
 }
 
+.search-empty-state {
+  margin-top: 2rem;
+}
+
+.search-empty-state svg {
+  color: var(--text-secondary);
+}
+
 .dark-theme .empty-state {
   color: var(--text-muted-dark, #a0aec0);
 }

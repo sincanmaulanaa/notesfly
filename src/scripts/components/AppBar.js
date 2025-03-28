@@ -212,13 +212,56 @@ class AppBar extends HTMLElement {
       this.searchInputDesktop.value = searchTerm;
     }
 
-    const noteItems = document.querySelectorAll('note-item');
+    const activeNoteList = document.querySelector('note-list');
+    const archivedNoteList = document.querySelector('archived-note-list');
+
+    let visibleList;
+    if (activeNoteList && activeNoteList.style.display !== 'none') {
+      visibleList = activeNoteList;
+    } else if (archivedNoteList && archivedNoteList.style.display !== 'none') {
+      visibleList = archivedNoteList;
+    } else {
+      return;
+    }
+
+    const noteItems = visibleList.querySelectorAll('.note-item');
     noteItems.forEach((item) => {
-      const title = item.getAttribute('title').toLowerCase();
-      const body = item.getAttribute('body').toLowerCase();
+      const title = item.querySelector('h2').textContent.toLowerCase();
+      const body = item.querySelector('p').textContent.toLowerCase();
+
       item.style.display =
         title.includes(searchTerm) || body.includes(searchTerm) ? '' : 'none';
     });
+
+    if (
+      searchTerm &&
+      Array.from(noteItems).every((item) => item.style.display === 'none')
+    ) {
+      let emptyState = visibleList.querySelector('.search-empty-state');
+
+      if (!emptyState) {
+        emptyState = document.createElement('div');
+        emptyState.className = 'empty-state search-empty-state';
+        emptyState.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <p>No notes found matching "${searchTerm}"</p>
+        `;
+        visibleList.appendChild(emptyState);
+      } else {
+        const message = emptyState.querySelector('p');
+        if (message) {
+          message.textContent = `No notes found matching "${searchTerm}"`;
+        }
+      }
+    } else {
+      const emptyState = visibleList.querySelector('.search-empty-state');
+      if (emptyState) {
+        emptyState.remove();
+      }
+    }
   }
 
   loadSavedPreferences() {
