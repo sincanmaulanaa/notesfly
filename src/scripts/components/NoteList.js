@@ -1,4 +1,4 @@
-import { getAllNotes, removeNote } from '../data/dataSource';
+import { archiveNote, getAllNotes, removeNote } from '../data/dataSource';
 import Swal from 'sweetalert2';
 import './Loading';
 
@@ -30,6 +30,17 @@ class NoteList extends HTMLElement {
   }
 
   renderNotes(notes) {
+    if (notes.length === 0) {
+      this.innerHTML = `<div class="empty-state">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+		  <p>No active notes found</p>
+		</div>`;
+      return;
+    }
+
     this.innerHTML = notes
       .map((note) => this.createNoteTemplate(note))
       .join('');
@@ -78,10 +89,32 @@ class NoteList extends HTMLElement {
     );
   }
 
-  handleArchive(button) {
+  async handleArchive(button) {
     const noteId = button.dataset.id;
-    console.log(`Archiving note: ${noteId}`);
-    // Add archive logic here if needed
+    try {
+      await archiveNote(noteId);
+      await Swal.fire({
+        title: 'Archived!',
+        text: 'Your note has been moved to archived notes.',
+        icon: 'success',
+      });
+      this.render();
+
+      const archivedNoteListElement =
+        document.querySelector('archived-note-list');
+      if (
+        archivedNoteListElement &&
+        archivedNoteListElement.style.display !== 'none'
+      ) {
+        await archivedNoteListElement.render();
+      }
+    } catch (error) {
+      Swal.fire({
+        title: 'Failed!',
+        text: 'Failed to archive the note.',
+        icon: 'error',
+      });
+    }
   }
 
   async handleRemove(button) {

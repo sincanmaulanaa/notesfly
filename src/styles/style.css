@@ -435,6 +435,7 @@ button[type='submit']:hover:not(:disabled) {
 }
 
 /* Note List Styles */
+archived-note-list,
 note-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -444,23 +445,25 @@ note-list {
 }
 
 @media (min-width: 640px) {
+  archived-note-list,
   note-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
+  archived-note-list,
   note-list {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
+archived-note-list,
 note-list.list-view {
   grid-template-columns: 1fr;
 }
 
 /* Note Item Styles */
-note-item,
 .note-item {
   background-color: var(--background-white);
   border-radius: var(--border-radius);
@@ -474,13 +477,11 @@ note-item,
   border: 1px solid var(--border-color);
 }
 
-note-item:hover,
 .note-item:hover {
   box-shadow: var(--shadow-medium);
   transform: translateY(-2px);
 }
 
-note-item h2,
 .note-item h2 {
   font-size: 1.125rem;
   margin-bottom: 0.1rem;
@@ -495,7 +496,6 @@ note-item h2,
   font-weight: 400;
 }
 
-note-item p,
 .note-item p {
   color: var(--text-secondary);
   font-size: 0.875rem;
@@ -512,6 +512,7 @@ note-item p,
   justify-content: flex-end;
 }
 
+.btn-unarchive,
 .btn-archive,
 .btn-remove {
   display: flex;
@@ -527,20 +528,23 @@ note-item p,
   transition: all 0.2s ease-in-out;
 }
 
+.btn-unarchive,
 .btn-archive {
   background-color: var(--primary-color);
   color: white;
 }
 
+.btn-unarchive:hover,
 .btn-archive:hover {
   background-color: var(--primary-dark);
   transform: translateY(-1px);
 }
 
+.btn-unarchive:active,
 .btn-archive:active {
   transform: translateY(0);
 }
-
+.btn-unarchive svg,
 .btn-archive svg {
   width: 14px;
   height: 14px;
@@ -609,7 +613,6 @@ note-item p,
     width: 90%;
   }
 
-  note-item,
   .note-item {
     padding: 1rem;
   }
@@ -639,19 +642,6 @@ note-item p,
 
 .dark-theme ::-webkit-scrollbar-thumb {
   background: #4a5568;
-}
-
-/* Empty state */
-note-list:empty::after {
-  content: 'No notes yet. Create your first note!';
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 2.5rem;
-  color: var(--text-secondary);
-  font-style: italic;
-  background-color: var(--background-white);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
 }
 
 /* Footer Styles */
