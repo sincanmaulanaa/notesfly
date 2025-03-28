@@ -69,7 +69,7 @@ notesfly/
 │   │   └── app.js
 │   └── styles/
 │       └── style.css
-└── images/
+└── assets/
     └── app-icon.png
     └── screenshot.png
 ```
@@ -114,12 +114,11 @@ The application supports both light and dark themes:
 
 ## Screenshots
 
-![Desktop Version](src/images/screenshot.png)
+![Desktop Version](src/assets/screenshot.png)
 
 ## Future Improvements
 
 - Note editing functionality
-- Note deletion
 - Categories/tags for notes
 - Cloud synchronization
 - Rich text formatting

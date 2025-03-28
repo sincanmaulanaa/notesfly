@@ -1,0 +1,46 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "Capture Ideas, Elevate Productivity.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "prettier": "npx prettier . --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sincanmaulanaa/notesfly.git"
+  },
+  "keywords": [
+    "notes",
+    "dicoding",
+    "submission"
+  ],
+  "author": "Sincan Maulana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sincanmaulanaa/notesfly/issues"
+  },
+  "homepage": "https://github.com/sincanmaulanaa/notesfly#readme",
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "babel-loader": "^10.0.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^7.1.2",
+    "favicons": "^7.2.0",
+    "favicons-webpack-plugin": "^6.0.1",
+    "html-webpack-plugin": "^5.6.3",
+    "prettier": "3.5.3",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1",
+    "webpack-merge": "^6.0.1"
+  },
+  "dependencies": {
+    "regenerator-runtime": "^0.14.1",
+    "sweetalert2": "^11.17.2"
+  }
+}
