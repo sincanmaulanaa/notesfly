@@ -45,7 +45,7 @@ class ArchivedNoteList extends HTMLElement {
 			<rect x="1" y="3" width="22" height="5"></rect>
 			<line x1="10" y1="12" x2="14" y2="12"></line>
 		  </svg>
-		  <p>No archived notes found</p>
+		  <p>Your archive is currently empty. Start organizing your notes by archiving the ones you want to keep but don't need right now!</p>
 		</div>`;
 
       if (localStorage.getItem('view') === 'list') {
