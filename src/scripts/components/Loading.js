@@ -1,38 +1,3 @@
-/**
- * A custom HTML element that displays a loading spinner with various styles, sizes, and colors.
- *
- * @class LoadingSpinner
- * @extends {HTMLElement}
- *
- * @example
- * <loading-spinner size="large" color="secondary" type="dots" aria-label="Loading data"></loading-spinner>
- *
- * @attribute {string} size - The size of the spinner. Options: "small", "medium", "large". Default: "medium".
- * @attribute {string} color - The color of the spinner. Options: "primary", "secondary", "white", "gray". Default: "primary".
- * @attribute {string} type - The type of spinner. Options: "circle", "dots", "pulse". Default: "circle".
- * @attribute {string} aria-label - The accessible label for the spinner. Default: "Loading".
- * @attribute {boolean} fullscreen - If present, the spinner will be displayed in fullscreen mode.
- *
- * @property {string} size - The size of the spinner.
- * @property {string} color - The color of the spinner.
- * @property {string} type - The type of spinner.
- * @property {string} label - The accessible label for the spinner.
- * @property {boolean} fullscreen - Whether the spinner is displayed in fullscreen mode.
- *
- * @method connectedCallback - Lifecycle method called when the element is added to the DOM. Initializes attributes and renders the spinner.
- * @method attributeChangedCallback - Lifecycle method called when an observed attribute changes. Updates the spinner accordingly.
- * @method render - Renders the spinner based on the current attributes and properties.
- *
- * @static
- * @method observedAttributes - Returns an array of attributes to observe for changes.
- *
- * @csspart spinner-container - The container for the spinner.
- * @csspart fullscreen-container - The container for the spinner in fullscreen mode.
- * @csspart spinner-circle - The circle spinner element.
- * @csspart spinner-dots - The dots spinner element.
- * @csspart spinner-pulse - The pulse spinner element.
- * @csspart sr-only - The screen-reader-only text element.
- */
 class LoadingSpinner extends HTMLElement {
   constructor() {
     super();
