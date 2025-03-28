@@ -123,7 +123,7 @@ class NoteForm extends HTMLElement {
           await noteListElement.render();
         }
       } catch (error) {
-        this.displayErrorMessage('Failed to create note. Please try again.');
+        this.displayErrorMessage();
       }
     }
   }
@@ -138,17 +138,12 @@ class NoteForm extends HTMLElement {
     this.button.disabled = true;
   }
 
-  displayErrorMessage(message) {
-    const errorMessage = document.createElement('div');
-    errorMessage.className = 'error-message';
-    errorMessage.textContent = message;
-    this.form.appendChild(errorMessage);
-
-    setTimeout(() => {
-      if (errorMessage.parentNode) {
-        errorMessage.parentNode.removeChild(errorMessage);
-      }
-    }, 3000);
+  displayErrorMessage() {
+    Swal.fire({
+      title: 'Oops!',
+      text: 'Something went wrong while creating your note. Please check your internet and try again.',
+      icon: 'error',
+    });
   }
 }
 

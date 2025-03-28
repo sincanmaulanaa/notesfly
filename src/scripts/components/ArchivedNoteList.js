@@ -19,15 +19,11 @@ class ArchivedNoteList extends HTMLElement {
       this.renderNotes(notes);
       this.attachEventListeners();
     } catch (error) {
-      console.error('Error rendering archived notes:', error);
       Swal.fire({
-        title: 'Failed!',
-        text: 'Failed to load archived notes.',
+        title: 'Oops!',
+        text: 'We encountered an issue while loading your notes. Please refresh the page or check your internet connection.',
         icon: 'error',
       });
-      this.innerHTML = `<div class="empty-state">
-        <p>Failed to load archived notes. Please try again later.</p>
-      </div>`;
     }
   }
 

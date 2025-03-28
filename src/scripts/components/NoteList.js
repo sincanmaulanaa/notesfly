@@ -15,7 +15,11 @@ class NoteList extends HTMLElement {
       this.renderNotes(notes);
       this.attachEventListeners();
     } catch (error) {
-      console.error('Error rendering notes:', error);
+      Swal.fire({
+        title: 'Oops!',
+        text: 'We encountered an issue while loading your notes. Please refresh the page or check your internet connection.',
+        icon: 'error',
+      });
     }
   }
 
