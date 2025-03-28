@@ -2,7 +2,7 @@ import 'regenerator-runtime';
 import './styles/style.css';
 import './styles/loading.css';
 import './styles/navigation.css';
-import './scripts/components/appBar';
+import './scripts/components/AppBar';
 import './scripts/components/NoteForm';
 import './scripts/components/AppFooter';
 import './scripts/components/NoteList';
