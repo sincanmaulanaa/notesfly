@@ -463,6 +463,12 @@ note-list.list-view {
   grid-template-columns: 1fr;
 }
 
+note-list.list-view .empty-state,
+archived-note-list.list-view .empty-state {
+  grid-column: 1;
+  max-width: 100%;
+}
+
 /* Note Item Styles */
 .note-item {
   background-color: var(--background-white);
