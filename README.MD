@@ -119,7 +119,6 @@ The application supports both light and dark themes:
 ## Future Improvements
 
 - Note editing functionality
-- Note deletion
 - Categories/tags for notes
 - Cloud synchronization
 - Rich text formatting
