@@ -104,10 +104,12 @@ class ArchivedNoteList extends HTMLElement {
   }
 
   async handleUnarchive(button) {
+    this.showLoadingSpinner();
     const noteId = button.dataset.id;
 
     try {
       await unarchiveNote(noteId);
+      this.hideLoadingSpinner();
       await Swal.fire({
         title: 'Unarchived!',
         text: 'Your note has been moved back to active notes.',
@@ -142,8 +144,10 @@ class ArchivedNoteList extends HTMLElement {
     });
 
     if (result.isConfirmed) {
+      this.showLoadingSpinner();
       try {
         await removeNote(noteId);
+        this.hideLoadingSpinner();
         await Swal.fire({
           title: 'Deleted!',
           text: 'Your note has been deleted.',
@@ -151,6 +155,7 @@ class ArchivedNoteList extends HTMLElement {
         });
         this.render();
       } catch (error) {
+        this.hideLoadingSpinner();
         Swal.fire({
           title: 'Failed!',
           text: 'Failed to delete the note.',
