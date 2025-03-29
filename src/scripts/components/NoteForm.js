@@ -56,6 +56,29 @@ class NoteForm extends HTMLElement {
     this.updateButtonState();
   }
 
+  showLoadingSpinner() {
+    const spinner = document.createElement('loading-spinner');
+    spinner.setAttribute('fullscreen', '');
+    spinner.setAttribute('size', 'large');
+    spinner.classList.add('form-spinner');
+
+    this.appendChild(spinner);
+
+    this.titleInput.disabled = true;
+    this.bodyInput.disabled = true;
+    this.button.disabled = true;
+  }
+
+  hideLoadingSpinner() {
+    const spinner = this.querySelector('.form-spinner');
+    if (spinner) spinner.remove();
+
+    this.titleInput.disabled = false;
+    this.bodyInput.disabled = false;
+
+    this.updateButtonState();
+  }
+
   validateTitle(value) {
     if (!value) return { valid: false, message: 'Title is required' };
     if (value.length < 3)
@@ -105,6 +128,7 @@ class NoteForm extends HTMLElement {
     const isBodyValid = this.validateBody(this.bodyInput.value).valid;
 
     if (isTitleValid && isBodyValid) {
+      this.showLoadingSpinner();
       const newNote = {
         title: this.titleInput.value,
         body: this.bodyInput.value,
@@ -112,6 +136,7 @@ class NoteForm extends HTMLElement {
 
       try {
         await createNote(newNote);
+        this.hideLoadingSpinner();
         await Swal.fire({
           title: 'Note Created!',
           text: 'Your new note has been successfully added. Keep up the great work!',
@@ -123,6 +148,7 @@ class NoteForm extends HTMLElement {
           await noteListElement.render();
         }
       } catch (error) {
+        this.hideLoadingSpinner();
         this.displayErrorMessage();
       }
     }

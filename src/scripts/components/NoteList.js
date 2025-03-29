@@ -99,9 +99,11 @@ class NoteList extends HTMLElement {
   }
 
   async handleArchive(button) {
+    this.showLoadingSpinner();
     const noteId = button.dataset.id;
     try {
       await archiveNote(noteId);
+      this.hideLoadingSpinner();
       await Swal.fire({
         title: 'Archived!',
         text: 'Your note has been moved to archived notes.',
@@ -118,6 +120,7 @@ class NoteList extends HTMLElement {
         await archivedNoteListElement.render();
       }
     } catch (error) {
+      this.hideLoadingSpinner();
       Swal.fire({
         title: 'Failed!',
         text: 'Failed to archive the note.',
@@ -140,8 +143,10 @@ class NoteList extends HTMLElement {
     });
 
     if (result.isConfirmed) {
+      this.showLoadingSpinner();
       try {
         await removeNote(noteId);
+        this.hideLoadingSpinner();
         await Swal.fire({
           title: 'Deleted!',
           text: 'Your note has been deleted.',
@@ -149,6 +154,7 @@ class NoteList extends HTMLElement {
         });
         this.render();
       } catch (error) {
+        this.hideLoadingSpinner();
         Swal.fire({
           title: 'Failed!',
           text: 'Failed to delete the note.',
